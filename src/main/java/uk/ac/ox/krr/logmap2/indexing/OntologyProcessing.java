@@ -20,6 +20,7 @@ package uk.ac.ox.krr.logmap2.indexing;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -62,6 +63,9 @@ import uk.ac.ox.krr.logmap2.reasoning.profiles.CheckOWL2Profile;
 import uk.ac.ox.krr.logmap2.utilities.Lib;
 import uk.ac.ox.krr.logmap2.utilities.PrecomputeIndexCombination;
 import uk.ac.ox.krr.logmap2.utilities.Utilities;
+
+import eu.kidf.divapi.IDivAPI;  // DivAPI
+import eu.kidf.divapi.diversiconkb.DiversiconAdaptor; //Diversicon Adaptor
 
 /**
  * This class will extract the lexicon and structure of the given ontology
@@ -2195,6 +2199,15 @@ public class OntologyProcessing {
 		
 		
 		shift=1;
+		DiversiconAdaptor div = null; //DIVERSICON
+		try {
+			div = new DiversiconAdaptor("~/Research/Diversicon/updatedVersion/divercli-0.1.0-SNAPSHOT/wn31/wn31");
+			//DIVERSICON	
+			
+		} catch (IOException e) {
+			System.err.println("Error connecting with Diversicon: " + e.getMessage());
+			e.printStackTrace();
+		}
 		
 		for (int i=0; i<words.length; i++){
 			
@@ -2204,6 +2217,17 @@ public class OntologyProcessing {
 			//if (IndexingUtilities.getLabel2wordnetsyn().containsKey(words[i])){
 			//	set_syn.addAll(IndexingUtilities.getLabel2wordnetsyn().get(words[i]));
 			//}
+			
+			/************** DiversiconExtension ********************/
+			
+			
+			if (div.getRelatedWords(null, null, words[i], IDivAPI.WORD_RELATEDNESS) != null) {
+				set_syn.addAll(div.getRelatedWords(null, null, words[i], IDivAPI.WORD_RELATEDNESS));
+			}
+
+		/*******************************************************/
+			
+			
 
 			//We use normalization from UMLS Specialist Lexicon 
 			if (lexicalUtilities.hasNormalization(words[i])){
