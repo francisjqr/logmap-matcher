@@ -1,17 +1,22 @@
 print_output|false
 bad_score_scope|0.0
-good_isub_anchors|0.98
-good_isub_candidates|0.95
-good_confidence|0.50
+#good_isub_anchors|0.99
+good_isub_anchors|0.9
+#good_isub_candidates|0.95
+good_isub_candidates|0.85
+#good_confidence|0.5
+good_confidence|0.5
 good_sim_coocurrence|0.08
+#min_conf_pro_map|0.80
 min_conf_pro_map|0.80
 confidence_composed_mappings1|0.8
 confidence_composed_mappings2|0.7
 avoid_redundant_labels|true
-max_redundancy_labels|3
-max_ambiguity|4
-good_ambiguity|2
-use_overlapping|true
+max_redundancy_labels|30
+max_ambiguity|200
+good_ambiguity|50
+# true for >15000entities use_overlapping|true
+use_overlapping|false
 min_size_overlapping|15000
 output_class_mappings|true
 output_prop_mappings|true
@@ -118,4 +123,3 @@ allowed_individual_type|http://erlangen-crm.org/efrbroo/F22_Self-Contained_Expre
 filter_entity|http://xmlns.com/foaf/
 filter_entity|http://www.w3.org/1999/02/22-rdf-syntax-ns
 filter_entity|http://purl.org/dc/elements/
-

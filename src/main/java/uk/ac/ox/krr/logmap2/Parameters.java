@@ -119,29 +119,37 @@ public class Parameters {
 	
 	
 	public static double bad_score_scope = 0.0;
+	// Probar valor negativo, ya que no tiene vecinos y el peor valor será 0.
 	
-	public static double good_isub_anchors = 0.98;
+//	public static double good_isub_anchors = 0.98; Default
+	public static double good_isub_anchors = 0.05;
 	
-	public static double good_isub_candidates = 0.95;
+//	public static double good_isub_candidates = 0.95; Default
+	public static double good_isub_candidates = 0.05;
 	
-	public static double good_confidence = 0.50;
+//	public static double good_confidence = 0.50;  Default
+	public static double good_confidence = 0.05;
 	
-	public static double min_conf_pro_map = 0.75;
+//	public static double min_conf_pro_map = 0.75; Default
+	public static double min_conf_pro_map = 0.1;
+	
+//	public static double min_isub_instances = 0.75; Default
+	public static double min_isub_instances = 0.1;	
 	
 	
-	public static double min_isub_instances = 0.75;
-	
-	
-	
-	public static double good_sim_coocurrence = 0.08; //Tested one 0.09
+	public static double good_sim_coocurrence = 0.01; //Tested one 0.09
+		// Si se repite el mismo término en la ontología. Como en grandes documentos. Ahora es mejor Word Embeddings.
 	
 	public static boolean avoid_redundant_labels = true;
 	
 	public static int max_redundancy_labels = 3;
 	
 	public static int max_ambiguity = 4;
+	// Hace que como máximo una entidad tenga 4 matchings. Es posible que se den más en ICD vs SNOMED-CT
+	// Se puede crear.
 	
 	public static int good_ambiguity = 2;
+	// 2 es lo óptimo, pero ha llegado a valer 3 y 4.
 	
 	//Note that even if overlapping is set to true. It will only applied for big ontologies >15000 
 	public static boolean use_overlapping = false;
@@ -179,13 +187,14 @@ public class Parameters {
 	
 	public static boolean output_equivalences_only = false;
 	
-	public static boolean use_umls_lexicon = true;
+	public static boolean use_umls_lexicon = false;
 	
 	public static boolean reverse_labels = false;
 	
 	public static boolean allow_interactivity = false;
 	
-	public static boolean allow_multilingual = true;
+//	public static boolean allow_multilingual = true; Default
+	public static boolean allow_multilingual = false;
 	public static boolean is_test_mode_multilingual = false;  //for testing, we only simulate translation
 	public static boolean use_local_dict = true;
 	public static boolean call_online_translator = true;

@@ -232,9 +232,33 @@ public class OntologyProcessing {
 
 		// DIVERSICON
 		try {
-			this.div = new DiversiconAdaptor(
-					"/Users/francis/MarieCurieESR/PhD/Resources/Diversicon/updatedVersion/divercli-0.1.0-SNAPSHOT/wn31/wn31");
 
+//			// MeSH
+//			// this.div = new DiversiconAdaptor(
+//			// "/Users/francis/MarieCurieESR/PhD/Resources/Diversicon/divercli-0.1.0-SNAPSHOT/bin/medicalExtensionsProject/wn31/wn31");
+//			//
+//			// SPECIALIST
+			
+//			 this.div = new DiversiconAdaptor(
+//			 	"/Users/francis/MarieCurieESR/PhD/Resources/Diversicon/updatedVersion/divercli-0.1.0-SNAPSHOT/wn31/wn31"
+//			 );
+			 
+//
+			// Symbolic
+//			this.div = new DiversiconAdaptor(
+//					"/Users/francis/MarieCurieESR/PhD/Resources/Diversicon/updatedVersion/divercli-0.1.0-SNAPSHOT/v1SymbolicExtension/wn31/wn31");
+			
+//			// Grammar
+//						this.div = new DiversiconAdaptor(
+//								"/Users/francis/MarieCurieESR/PhD/Resources/Diversicon/updatedVersion/divercli-0.1.0-SNAPSHOT/reducedGrammarExtension/wn31/wn31");
+						
+////			
+//			// Symbolic Grammar
+						this.div = new DiversiconAdaptor(
+								"/Users/francis/MarieCurieESR/PhD/Resources/Diversicon/updatedVersion/divercli-0.1.0-SNAPSHOT/v1SymbolicExtensionGrammar/wn31/wn31");
+//								
+//			
+//			
 		} catch (IOException e) {
 			System.err.println("Error connecting with Diversicon: " + e.getMessage());
 			e.printStackTrace();
@@ -1973,7 +1997,7 @@ public class OntologyProcessing {
 	private Set<String> extendAlternativeLabel(String label_value) {
 
 		Set<String> set_syn = new HashSet<String>();
-		
+
 		Set<String> diversiconReturnedSynonyms = new HashSet<String>(); // Diversicon
 
 		List<Set<String>> wordi2syn = new ArrayList<Set<String>>();
@@ -2012,7 +2036,10 @@ public class OntologyProcessing {
 			// }
 
 			/************** DiversiconExtension ********************/
-			diversiconReturnedSynonyms = div.getRelatedWords(null, null, words[i], IDivAPI.WORD_RELATEDNESS);
+//			diversiconReturnedSynonyms = div.getRelatedWords(null, null, words[i], IDivAPI.WORD_RELATEDNESS);
+//			diversiconReturnedSynonyms = div.getRelatedWords(null, null, words[i], IDivAPI.WORD_SIMILARITY);
+			diversiconReturnedSynonyms = div.getRelatedWords(null, null, words[i], IDivAPI.WORD_SYNONYMY);
+			System.out.println(diversiconReturnedSynonyms);
 			if (diversiconReturnedSynonyms != null) {
 				set_syn.addAll(diversiconReturnedSynonyms);
 			}
@@ -2048,6 +2075,7 @@ public class OntologyProcessing {
 		long comb = 1;
 
 		// Too many combinations.... (max=1000)
+		// COn la memoria de hoy en día, podría ponerse más
 		for (Set<String> set : wordi2syn) {
 			comb = comb * set.size();
 		}
